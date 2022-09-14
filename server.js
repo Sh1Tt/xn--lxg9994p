@@ -1,20 +1,27 @@
-'use-strict';
-
-const server = require("socket.io")(443, {
+const { port } = conf = {
+	proto: "http",
+	port: 3000,
+};
+const server = require("socket.io")(port, {
 	cors: {
 		origin: ["*"],
 	},
 });
-
-const io = require("socket.io-client");
-
 server.on("connection", socket => {
 	console.log(socket.id);
 });
-
-const ioclient = [
-	io("212.227.68.123:443"),
-	io("81.169.159.30:443")
+const io = require("socket.io-client");
+let nodeList = [
+	`212.227.68.123`
 ];
-
-console.log(ioclient[0])
+let clients = [];
+const connectClients = () => {
+	nodeList.forEach((node,i) => {
+		const uri = `${conf.proto}://${node}:${port}`;
+		let socket = clients[i] = io(uri);
+		socket.on("connect", () => {
+			console.log("connected with ID: "+socket.id);
+		});
+	});
+};
+connectClients();
