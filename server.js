@@ -1,17 +1,20 @@
-const io = require("websocket.io")(443, {
+'use-strict';
+
+const server = require("socket.io")(443, {
 	cors: {
 		origin: ["*"],
 	},
 });
 
-import { io as ioClient } from "websocket.io-client";
+const io = require("socket.io-client");
 
-io.on("connection", socket => {
+server.on("connection", socket => {
 	console.log(socket.id);
-
 });
 
 const ioclient = [
-	0: ioClient("212.227.68.123:443"),
-	1: ioClient("81.169.159.30:443")
+	io("212.227.68.123:443"),
+	io("81.169.159.30:443")
 ];
+
+console.log(ioclient[0])
