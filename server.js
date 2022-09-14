@@ -1,10 +1,10 @@
 // DONNA
-const { port } = conf = {
+const { port, isNode } = conf = {
 	proto: "http",
 	port: 3000,
+	isNode: true
 };
 let ids = [], clients = [],
-// activeNodes = [], 
 nodeListFromChain = [
 	`212.227.68.123`,
 	`81.169.159.30`
